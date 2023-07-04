@@ -1,0 +1,9 @@
+landuse.sql filter=lfs diff=lfs merge=lfs -text
+power_lines.sql filter=lfs diff=lfs merge=lfs -text
+power_pois.sql filter=lfs diff=lfs merge=lfs -text
+route_multiline.sql filter=lfs diff=lfs merge=lfs -text
+route_polygon.sql filter=lfs diff=lfs merge=lfs -text
+wikipedia_linestring.sql filter=lfs diff=lfs merge=lfs -text
+wikipedia_multiline.sql filter=lfs diff=lfs merge=lfs -text
+building.sql filter=lfs diff=lfs merge=lfs -text
+wikipedia_polygon.sql filter=lfs diff=lfs merge=lfs -text

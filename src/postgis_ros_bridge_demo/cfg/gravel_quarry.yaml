@@ -1,0 +1,83 @@
+postgis_ros_publisher:
+  ros__parameters:
+    postgresql:
+      user: "postgres"
+      # pass_env: "POSTGRES_PASSWORD" # read password from environment variable
+      pass: "postgres" # TODO: Alternative way w/o need of storing password in plaintext
+      host: "localhost"
+      port: 5444
+      schema: "kieswerk"
+
+    publish:
+      - query_power_pois
+      - query_power_lines
+      - query_route_multiline
+      - query_route_polygon
+      - query_landuse
+      - query_building
+
+    # special section for default values for all queries
+    query_defaults:
+      rate: 0.5
+      frame_id: "utm"
+      geodesic: true
+    
+    cartesian_transform:  
+      type: "utm"
+      lon: 14.4261733
+      lat: 48.2345708
+      broadcast_cartesian_transform: true
+      cartesian_frame_id: "utm"
+      world_frame_id: "map"
+        
+    query_power_pois:
+      query: "SELECT ogc_fid AS id, wkb_geometry AS geometry FROM power_pois;"
+      type: "MarkerArray" 
+      topic: "powerlines"
+      marker_ns : "power_pois"
+
+      marker_type: "visualization_msgs::Marker::MESH_RESOURCE"  
+      marker_scale: [2.0, 2.0, 2.0]
+      # marker_orientation: [0.7071, 0.0, 0.0, 0.7071] # overrides orientation geometry
+      marker_mesh_resource: "package://postgis_ros_bridge_demo/power_transmission_line2.dae"
+
+
+    query_power_lines:
+      query: "SELECT ogc_fid AS id, wkb_geometry AS geometry FROM power_lines_3D;"
+      type: "MarkerArray" 
+      topic: "powerlines"
+      marker_ns : "power_lines"
+      marker_scale: [1.0, 1.0, 1.0]
+      marker_color: [1.0, 0.0, 0.0, 1.0]
+
+    query_route_multiline:
+      query: "SELECT ogc_fid AS id, wkb_geometry AS geometry FROM route_multiline;"
+      type: "MarkerArray" 
+      topic: "route"
+      marker_ns : "route_multiline"
+      marker_scale: [1.0, 1.0, 1.0]
+      marker_color: [0.0, 1.0, 0.0, 1.0]
+
+    query_route_polygon:
+      query: "SELECT ogc_fid AS id, wkb_geometry AS geometry FROM route_polygon;"
+      type: "MarkerArray" 
+      topic: "route"
+      marker_ns : "route_polygon"
+      marker_scale: [1.0, 1.0, 1.0]
+      marker_color: [1.0, 1.0, 0.0, 1.0]
+
+    query_landuse:
+        query: "SELECT ogc_fid AS id, wkb_geometry AS geometry FROM landuse;"
+        type: "MarkerArray" 
+        topic: "marker"
+        marker_ns : "landuse"
+        marker_scale: [1.0, 1.0, 1.0]
+        marker_color: [0.0, 1.0, 1.0, 1.0]
+
+    query_building:
+        query: "SELECT ogc_fid AS id, wkb_geometry AS geometry FROM building;"
+        type: "MarkerArray" 
+        topic: "marker"
+        marker_ns : "building"
+        marker_scale: [1.0, 1.0, 1.0]
+        marker_color: [1.0, 1.0, 1.0, 1.0]

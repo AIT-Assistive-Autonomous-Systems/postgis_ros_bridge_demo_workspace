@@ -1,0 +1,10 @@
+build/*
+install/*
+log/*
+site/*
+src/*
+*.pyc
+__pycache__
+.pytest_cache
+!src/ros2.repos
+!src/postgis_ros_bridge_demo
