@@ -33,6 +33,8 @@ def generate_launch_description():
     return LaunchDescription([
         DeclareLaunchArgument('rviz', default_value='true',
                               description='start rviz'),
+        DeclareLaunchArgument('foxglove', default_value='false',
+                              description='start foxglove bridge'),
         Node(
             package='postgis_ros_bridge',
             executable='postgis_ros_bridge_publisher_node',
@@ -72,5 +74,18 @@ def generate_launch_description():
             output='screen',
             condition=IfCondition(LaunchConfiguration("rviz")),
             arguments=['-d', os.path.join(pkg_share_dir, 'gravel_quarry.rviz')],
+        ),
+        Node(
+            package='foxglove_bridge',
+            executable='foxglove_bridge',
+            name='foxglove_bridge',
+            output='screen',
+            condition=IfCondition(LaunchConfiguration("foxglove"))
+        ),
+        ExecuteProcess(
+            cmd=[['foxglove-studio'
+                  ]],
+            shell=True,
+            condition=IfCondition(LaunchConfiguration("foxglove"))
         ),
     ])

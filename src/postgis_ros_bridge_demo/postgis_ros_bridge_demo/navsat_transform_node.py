@@ -127,17 +127,17 @@ class NavSatTransform(Node):
         marker.type = Marker.MESH_RESOURCE
         marker.pose.position.x = odom_msg.pose.pose.position.x
         marker.pose.position.y = odom_msg.pose.pose.position.y
-        marker.scale.x = 2.0
-        marker.scale.y = 2.0
-        marker.scale.z = 2.0
+        marker.scale.x = 1.0
+        marker.scale.y = 1.0
+        marker.scale.z = 1.0
         marker.color.a = 1.0
         marker.color.r = 0.0
         marker.color.b = 1.0
         marker.color.g = 0.0
 
-        q = Rotation.from_euler('z', self.yaw-90, degrees=True).as_quat()
+        q = Rotation.from_euler('z', self.yaw+90, degrees=True).as_quat()
         marker.pose.orientation = Quaternion(x=q[0], y=q[1], z=q[2], w=q[3])
-        marker.mesh_resource = 'package://postgis_ros_bridge_demo/volvo.dae'
+        marker.mesh_resource = 'package://postgis_ros_bridge_demo/loader.dae'
 
         self._pub_truck.publish(marker)
 

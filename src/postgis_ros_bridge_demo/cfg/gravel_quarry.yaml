@@ -15,6 +15,10 @@ postgis_ros_publisher:
       - query_route_polygon
       - query_landuse
       - query_building
+      - query_building_geojson
+      - query_landuse_geojson
+      - query_power_pois_geojson
+      - query_power_lines_geojson
 
     # special section for default values for all queries
     query_defaults:
@@ -39,23 +43,22 @@ postgis_ros_publisher:
       marker_type: "visualization_msgs::Marker::MESH_RESOURCE"  
       marker_scale: [2.0, 2.0, 2.0]
       # marker_orientation: [0.7071, 0.0, 0.0, 0.7071] # overrides orientation geometry
-      marker_mesh_resource: "package://postgis_ros_bridge_demo/power_transmission_line2.dae"
-
+      marker_mesh_resource: "package://postgis_ros_bridge_demo/power_transmission_line.dae"
 
     query_power_lines:
       query: "SELECT ogc_fid AS id, wkb_geometry AS geometry FROM power_lines_3D;"
       type: "MarkerArray" 
       topic: "powerlines"
       marker_ns : "power_lines"
-      marker_scale: [1.0, 1.0, 1.0]
-      marker_color: [1.0, 0.0, 0.0, 1.0]
+      marker_scale: [2.0, 1.0, 1.0]
+      marker_color: [1.0, 0.0, 0.0, 0.8]
 
     query_route_multiline:
       query: "SELECT ogc_fid AS id, wkb_geometry AS geometry FROM route_multiline;"
       type: "MarkerArray" 
       topic: "route"
       marker_ns : "route_multiline"
-      marker_scale: [1.0, 1.0, 1.0]
+      marker_scale: [2.0, 1.0, 1.0]
       marker_color: [0.0, 1.0, 0.0, 1.0]
 
     query_route_polygon:
@@ -63,7 +66,7 @@ postgis_ros_publisher:
       type: "MarkerArray" 
       topic: "route"
       marker_ns : "route_polygon"
-      marker_scale: [1.0, 1.0, 1.0]
+      marker_scale: [2.0, 1.0, 1.0]
       marker_color: [1.0, 1.0, 0.0, 1.0]
 
     query_landuse:
@@ -71,13 +74,37 @@ postgis_ros_publisher:
         type: "MarkerArray" 
         topic: "marker"
         marker_ns : "landuse"
-        marker_scale: [1.0, 1.0, 1.0]
-        marker_color: [0.0, 1.0, 1.0, 1.0]
+        marker_scale: [1.0, 2.0, 2.0]
+        marker_color: [0.0, 1.0, 1.0, 0.6]
 
     query_building:
         query: "SELECT ogc_fid AS id, wkb_geometry AS geometry FROM building;"
         type: "MarkerArray" 
         topic: "marker"
         marker_ns : "building"
-        marker_scale: [1.0, 1.0, 1.0]
-        marker_color: [1.0, 1.0, 1.0, 1.0]
+        marker_scale: [2.0, 0.0, 0.0]
+        marker_color: [0.8, 0.8, 0.8, 1.0]
+
+    query_building_geojson:
+        query: "SELECT json_build_object('type', 'FeatureCollection', 'features', json_agg(json_build_object('type', 'Feature', 'geometry', ST_AsGeoJSON(wkb_geometry)::json))) AS geojson FROM building"
+        type: "GeoJSON" 
+        topic: "geojson_building"
+        geodesic: false
+
+    query_landuse_geojson:
+        query: "SELECT json_build_object('type', 'FeatureCollection', 'features', json_agg(json_build_object('type', 'Feature', 'geometry', ST_AsGeoJSON(wkb_geometry)::json))) AS geojson FROM landuse"
+        type: "GeoJSON" 
+        topic: "geojson_landuse"
+        geodesic: false
+
+    query_power_pois_geojson:
+        query: "SELECT json_build_object('type', 'FeatureCollection', 'features', json_agg(json_build_object('type', 'Feature', 'geometry', ST_AsGeoJSON(wkb_geometry)::json))) AS geojson FROM power_pois"
+        type: "GeoJSON" 
+        topic: "geojson_power_pois"
+        geodesic: false
+
+    query_power_lines_geojson:
+        query: "SELECT json_build_object('type', 'FeatureCollection', 'features', json_agg(json_build_object('type', 'Feature', 'geometry', ST_AsGeoJSON(wkb_geometry)::json))) AS geojson FROM power_lines"
+        type: "GeoJSON" 
+        topic: "geojson_power_lines"
+        geodesic: false

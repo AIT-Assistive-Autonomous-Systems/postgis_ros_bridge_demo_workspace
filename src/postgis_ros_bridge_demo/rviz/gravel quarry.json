@@ -1,0 +1,96 @@
+{
+  "configById": {
+    "map!mnu7a3": {
+      "center": {
+        "lat": 48.229818715269595,
+        "lon": 14.432623386383058
+      },
+      "customTileUrl": "",
+      "disabledTopics": [],
+      "followTopic": "",
+      "layer": "map",
+      "topicColors": {
+        "/geojson_landuse": "#89f7f1",
+        "/geojson_power_pois": "#df3fb4",
+        "/geojson_power_lines": "#e34f4f",
+        "/geojson_building": "#adadad"
+      },
+      "zoomLevel": 15,
+      "maxNativeZoom": 18
+    },
+    "3D!29w31dm": {
+      "cameraState": {
+        "perspective": true,
+        "distance": 890.1910104928953,
+        "phi": 55.51832981884948,
+        "thetaOffset": 14.239695616301827,
+        "targetOffset": [
+          -110.49533362200081,
+          -540.6708839071266,
+          -8.29528217504835e-15
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "targetOrientation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "fovy": 45,
+        "near": 0.5,
+        "far": 5000
+      },
+      "followMode": "follow-pose",
+      "followTf": "map",
+      "scene": {
+        "backgroundColor": "#767676"
+      },
+      "transforms": {},
+      "topics": {
+        "/move_base_simple/goal": {
+          "visible": false
+        },
+        "/marker": {
+          "visible": true
+        },
+        "/powerlines": {
+          "visible": true
+        },
+        "/route": {
+          "visible": true
+        },
+        "/truck": {
+          "visible": true,
+          "showOutlines": true,
+          "color": "#b3000045"
+        }
+      },
+      "layers": {},
+      "publish": {
+        "type": "point",
+        "poseTopic": "/move_base_simple/goal",
+        "pointTopic": "/clicked_point",
+        "poseEstimateTopic": "/initialpose",
+        "poseEstimateXDeviation": 0.5,
+        "poseEstimateYDeviation": 0.5,
+        "poseEstimateThetaDeviation": 0.26179939
+      },
+      "imageMode": {}
+    }
+  },
+  "globalVariables": {},
+  "userNodes": {},
+  "playbackConfig": {
+    "speed": 1
+  },
+  "layout": {
+    "direction": "row",
+    "first": "map!mnu7a3",
+    "second": "3D!29w31dm",
+    "splitPercentage": 50.9231285666331
+  }
+}

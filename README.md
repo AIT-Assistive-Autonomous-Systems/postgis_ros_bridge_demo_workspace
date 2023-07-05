@@ -86,6 +86,23 @@ Th result should look as follows:
  </table>
 
 
+### Demo - with foxglove
+
+To run the demo with foxglove, use 
+
+```bash
+ros2 launch postgis_ros_bridge_demo gravel_quarry.launch.py foxglove:=true rviz:=false
+```
+
+in foxglove:
+  1. Connect to `ws://localhost:8765`
+  2. Load Layout (In top bar: `Layout->Import from file` ) from `/workspaces/postgis_ros_bridge_demo_workspace/src/postgis_ros_bridge_demo/rviz/gravel quarry.json`
+  3. Set `ROS_PACKAGE_PATH` under `Profile->Settings` to `/workspaces/postgis_ros_bridge_demo_workspace/install/share` (needed to find meshes)
+
+The result should look as follows: 
+
+<img src="src/postgis_ros_bridge_demo/data/foxglove-demo.png" width="500">
+
 
 ## Setup - Detailed Step-by-Step
 Clone this repository using
@@ -149,7 +166,7 @@ _Warning:_ Be aware of possible security issues and side-effect depending on you
 
 # Credits 
 
-* "VOLVO FH 16" (https://skfb.ly/oIIDx) by liebherr996litronic is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+* "wheel loader" (https://skfb.ly/6vNp6) by Anton Sereda is licensed under Creative Commons Attribution-NonCommercial (http://creativecommons.org/licenses/by-nc/4.0/).
 * "Power Transmission Line" (https://skfb.ly/oozIK) by combine_soldier is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
 # Funding
