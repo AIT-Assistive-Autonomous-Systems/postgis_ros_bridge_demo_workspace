@@ -75,7 +75,7 @@ Th result should look as follows:
 <table>
   <tr>
     <td align="center">Top-down view of a gravel quarry with semantic data from OSM as ROS2 marker visualized in rviz2.</td>
-    <td align="center">Top-down view on gravel quarry with zoom to powerline visualization (ROS2 marker).</td>
+    <td align="center">Bird's eye view on gravel quarry with zoom to powerline visualization (ROS2 marker).</td>
     <td align="center">Same rviz2 visualization with added odometry history from rosbag (demo for "live" usecase).</td>
   </tr>
   <tr>
