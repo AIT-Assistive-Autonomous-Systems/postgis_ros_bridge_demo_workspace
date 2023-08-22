@@ -28,11 +28,11 @@ RUN apt-get update \
    && rm -rf /var/lib/apt/lists/*
 
 # Install Foxglove Studio and ROS Bridge
-RUN wget https://github.com/foxglove/studio/releases/download/v1.58.0/foxglove-studio-1.58.0-linux-amd64.deb -o foxglove.deb && \
+RUN wget https://github.com/foxglove/studio/releases/download/v1.66.0/foxglove-studio-1.66.0-linux-amd64.deb -O foxglove.deb && \
     apt-get update && \
-    apt-get install -y ./foxglove-studio-1.58.0-linux-amd64.deb && \
+    apt-get install -y ./foxglove.deb && \
     apt-get -y install --no-install-recommends ros-${ROS_DISTRO}-foxglove-bridge && \
-    rm foxglove-studio-1.58.0-linux-amd64.deb && \
+    rm foxglove.deb && \
     apt-get autoremove -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
